@@ -1,0 +1,95 @@
+---
+const features = [
+  {
+    icon: '💬',
+    title: 'Consulta tu negocio por WhatsApp',
+    description: 'El corazón de Actulab. Como dueño, preguntas por WhatsApp y la IA te responde al instante con tus ventas, créditos, clientes e inventario.'
+  },
+  {
+    icon: '🤖',
+    title: 'Inteligencia artificial',
+    description: 'La IA interpreta tus preguntas en lenguaje natural, busca la información en tu sistema y te responde con datos reales y precisos.'
+  },
+  {
+    icon: '👥',
+    title: 'Gestión de clientes',
+    description: 'Mantén un registro organizado de tus clientes, historial de compras y datos de contacto en un solo lugar.'
+  },
+  {
+    icon: '📦',
+    title: 'Control de productos',
+    description: 'Administra tu inventario, categorías, precios y stock disponible de forma sencilla y rápida.'
+  },
+  {
+    icon: '💰',
+    title: 'Ventas y créditos',
+    description: 'Registra ventas, consulta tu historial de transacciones y lleva el control de créditos y saldos pendientes.'
+  },
+  {
+    icon: '🖥️',
+    title: 'Dashboard web',
+    description: 'Un panel administrativo completo para gestionar tu negocio desde el navegador cuando necesitas una vista detallada.'
+  }
+];
+---
+
+<section id="caracteristicas" class="section features">
+  <div class="container">
+    <h2 class="section-title">Todo lo que necesitas para tu negocio</h2>
+    <p class="section-subtitle">
+      La combinación de WhatsApp e inteligencia artificial te permite consultar tu negocio al instante, 
+      mientras administras todo con mayor detalle desde el dashboard web.
+    </p>
+    <div class="features-grid">
+      {features.map(feature => (
+        <article class="feature-card gradient-border">
+          <div class="feature-icon">{feature.icon}</div>
+          <h3 class="feature-title">{feature.title}</h3>
+          <p class="feature-description">{feature.description}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .features {
+    background-color: var(--color-surface);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    padding: 2rem;
+    border-radius: var(--radius);
+    background: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .feature-description {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+</style>

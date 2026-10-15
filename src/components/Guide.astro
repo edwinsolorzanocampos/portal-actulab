@@ -1,0 +1,110 @@
+---
+const LOGIN_URL = 'http://192.168.100.112:3000';
+
+const steps = [
+  {
+    number: '01',
+    title: 'Conecta tu WhatsApp',
+    description: 'Vincula tu línea de WhatsApp con Actulab para consultar tu negocio de forma natural y rápida.'
+  },
+  {
+    number: '02',
+    title: 'Configura tu negocio',
+    description: 'Registra tus productos, clientes, ventas y créditos desde el dashboard web.'
+  },
+  {
+    number: '03',
+    title: 'Consulta con IA',
+    description: 'Envía un mensaje por WhatsApp y la inteligencia artificial te responderá con los datos de tu negocio al instante.'
+  }
+];
+---
+
+<section id="guia" class="section guide">
+  <div class="container">
+    <h2 class="section-title">Cómo usar Actulab</h2>
+    <p class="section-subtitle">
+      Empieza a gestionar tu negocio en tres pasos simples. La magia sucede en WhatsApp.
+    </p>
+    <div class="steps">
+      {steps.map(step => (
+        <article class="step">
+          <span class="step-number">{step.number}</span>
+          <h3 class="step-title">{step.title}</h3>
+          <p class="step-description">{step.description}</p>
+        </article>
+      ))}
+    </div>
+    <div class="guide-cta">
+      <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" class="button-primary">
+        Acceder a Actulab
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .guide {
+    background-color: var(--color-bg);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .step {
+    position: relative;
+    padding: 2rem;
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+  }
+
+  .step-number {
+    display: inline-block;
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .step-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .step-description {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+  }
+
+  .guide-cta {
+    text-align: center;
+  }
+
+  .button-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 2rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .button-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+  }
+</style>

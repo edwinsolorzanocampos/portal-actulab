@@ -1,0 +1,79 @@
+---
+---
+
+<footer class="footer">
+  <div class="container footer-content">
+    <div class="footer-brand">
+      <span class="footer-logo">Actulab</span>
+      <p class="footer-tagline">Sistema inteligente de gestión para negocios.</p>
+    </div>
+    <nav class="footer-nav">
+      <a href="#caracteristicas">Características</a>
+      <a href="#guia">Guía</a>
+      <a href="#faq">FAQ</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p>© {new Date().getFullYear()} Actulab. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-text);
+    color: #cbd5e1;
+    padding-top: 3rem;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+  }
+
+  .footer-tagline {
+    margin-top: 0.5rem;
+    color: #94a3b8;
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+  }
+
+  .footer-nav a:hover {
+    color: white;
+  }
+
+  .footer-bottom {
+    padding: 1.5rem 0;
+    color: #94a3b8;
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .footer-content {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-bottom {
+      text-align: left;
+    }
+  }
+</style>
