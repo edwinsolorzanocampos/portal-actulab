@@ -2,26 +2,26 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
-import Features from '../components/Features.astro';
+import WhatIs from '../components/WhatIs.astro';
 import Guide from '../components/Guide.astro';
-import FAQ from '../components/FAQ.astro';
-import Team from '../components/Team.astro';
-import Contact from '../components/Contact.astro';
+import Features from '../components/Features.astro';
+import DashboardPreview from '../components/DashboardPreview.astro';
+import CTASection from '../components/CTASection.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <Layout 
-  title="Actulab - Portal informativo" 
-  description="Conoce Actulab, el sistema inteligente para gestionar clientes, productos, ventas y créditos de tu negocio."
+  title="Actulab - Gestiona tu negocio por WhatsApp" 
+  description="Actulab permite a pequeños y medianos negocios administrar inventario, ventas, clientes y créditos enviando simples mensajes por WhatsApp."
 >
   <Header />
   <main>
     <Hero />
-    <Features />
+    <WhatIs />
     <Guide />
-    <FAQ />
-    <Team />
-    <Contact />
+    <Features />
+    <DashboardPreview />
+    <CTASection />
   </main>
   <Footer />
 </Layout>

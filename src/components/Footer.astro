@@ -1,23 +1,60 @@
 ---
+const baseUrl = import.meta.env.BASE_URL;
+
+const navLinks = [
+  { label: 'Inicio', href: baseUrl },
+  { label: '¿Qué es?', href: '#que-es' },
+  { label: 'Cómo funciona', href: '#como-funciona' },
+  { label: 'Funcionalidades', href: '#funcionalidades' },
+  { label: 'Contacto', href: '#contacto' }
+];
 ---
 
-<footer class="footer">
+<footer id="contacto" class="footer">
   <div class="container footer-content">
     <div class="footer-brand">
-      <span class="footer-logo">Actulab</span>
-      <p class="footer-tagline">Sistema inteligente de gestión para negocios.</p>
+      <a href={baseUrl} class="footer-logo">
+        <span class="footer-logo-icon">A</span>
+        <span>Actulab</span>
+      </a>
+      <p class="footer-description">
+        Plataforma de gestión empresarial mediante inteligencia artificial y WhatsApp. 
+        Administra tu negocio hablando como lo haces todos los días.
+      </p>
     </div>
-    <nav class="footer-nav">
-      <a href="#caracteristicas">Características</a>
-      <a href="#guia">Guía</a>
-      <a href="#faq">FAQ</a>
-      <a href="#equipo">Equipo</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
+
+    <div class="footer-nav-column">
+      <span class="footer-heading">Navegación</span>
+      <nav class="footer-nav" aria-label="Navegación del pie">
+        {navLinks.map(link => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </nav>
+    </div>
+
+    <div class="footer-contact-column">
+      <span class="footer-heading">Contacto</span>
+      <ul class="footer-contact">
+        <li>
+          <span aria-hidden="true">✉️</span>
+          <a href="mailto:contacto@actulab.com">contacto@actulab.com</a>
+        </li>
+        <li>
+          <span aria-hidden="true">📞</span>
+          <a href="tel:+50600000000">+506 0000 0000</a>
+        </li>
+        <li>
+          <span aria-hidden="true">📍</span>
+          <span>Costa Rica</span>
+        </li>
+      </ul>
+    </div>
   </div>
+
   <div class="footer-bottom">
-    <div class="container">
+    <div class="container footer-bottom-content">
       <p>© {new Date().getFullYear()} Actulab. Todos los derechos reservados.</p>
+      <p class="footer-tagline">Tu negocio, al día. Solo necesitas WhatsApp.</p>
     </div>
   </div>
 </footer>
@@ -26,53 +63,118 @@
   .footer {
     background-color: var(--color-text);
     color: #cbd5e1;
-    padding-top: 3rem;
+    padding-top: 4rem;
   }
 
   .footer-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-bottom: 3rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
     font-size: 1.5rem;
     font-weight: 800;
     color: white;
+    margin-bottom: 1rem;
   }
 
-  .footer-tagline {
-    margin-top: 0.5rem;
+  .footer-logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.625rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    color: white;
+    font-size: 1rem;
+  }
+
+  .footer-description {
     color: #94a3b8;
+    line-height: 1.7;
+    max-width: 24rem;
+  }
+
+  .footer-heading {
+    display: block;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 1rem;
   }
 
   .footer-nav {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-nav a {
+    color: #94a3b8;
+    transition: color 0.2s ease;
   }
 
   .footer-nav a:hover {
     color: white;
   }
 
+  .footer-contact {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-contact li {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    color: #94a3b8;
+  }
+
+  .footer-contact a {
+    color: #94a3b8;
+    transition: color 0.2s ease;
+  }
+
+  .footer-contact a:hover {
+    color: white;
+  }
+
   .footer-bottom {
     padding: 1.5rem 0;
-    color: #94a3b8;
-    font-size: 0.875rem;
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  .footer-bottom-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     text-align: center;
+    font-size: 0.875rem;
+    color: #94a3b8;
+  }
+
+  .footer-tagline {
+    font-weight: 600;
+    color: white;
   }
 
   @media (min-width: 768px) {
     .footer-content {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
+      grid-template-columns: 2fr 1fr 1fr;
     }
 
-    .footer-bottom {
+    .footer-bottom-content {
+      flex-direction: row;
+      justify-content: space-between;
       text-align: left;
     }
   }

@@ -5,9 +5,11 @@ interface Props {
 }
 
 const { 
-  title = 'Actulab - Portal', 
-  description = 'Portal informativo de Actulab, el sistema inteligente de gestión para negocios.' 
+  title = 'Actulab - Gestiona tu negocio por WhatsApp', 
+  description = 'Actulab es la plataforma que permite a pequeños y medianos negocios administrar inventario, ventas, clientes y créditos enviando simples mensajes por WhatsApp.' 
 } = Astro.props;
+
+const baseUrl = import.meta.env.BASE_URL || '/';
 ---
 
 <!doctype html>
@@ -18,11 +20,28 @@ const {
     <meta name="color-scheme" content="light" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
     <title>{title}</title>
   </head>
   <body>
     <slot />
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      });
+    </script>
   </body>
 </html>
 
@@ -31,17 +50,26 @@ const {
     color-scheme: light;
     --color-bg: #ffffff;
     --color-surface: #f8fafc;
+    --color-surface-alt: #f1f5f9;
     --color-text: #0f172a;
     --color-text-muted: #475569;
     --color-primary: #2563eb;
     --color-primary-dark: #1d4ed8;
+    --color-primary-light: #dbeafe;
     --color-accent: #7c3aed;
     --color-accent-light: #a78bfa;
     --color-cyan: #06b6d4;
+    --color-cyan-light: #cffafe;
     --color-border: #e2e8f0;
-    --radius: 0.75rem;
-    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --color-success: #10b981;
+    --color-success-light: #d1fae5;
+    --whatsapp-green: #25d366;
+    --whatsapp-bubble: #dcf8c6;
+    --radius: 0.875rem;
+    --radius-lg: 1.25rem;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08);
+    --shadow-md: 0 6px 12px -2px rgb(0 0 0 / 0.1), 0 3px 6px -3px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   }
 
   *,
@@ -57,10 +85,12 @@ const {
   }
 
   body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background-color: var(--color-bg);
     color: var(--color-text);
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   a {
@@ -89,6 +119,7 @@ const {
     font-weight: 800;
     text-align: center;
     margin-bottom: 1rem;
+    letter-spacing: -0.02em;
     background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -110,6 +141,28 @@ const {
     border: 1px solid transparent;
   }
 
+  .gradient-text {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -120,6 +173,10 @@ const {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
     }
   }
 </style>

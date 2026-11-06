@@ -1,0 +1,259 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<Layout 
+  title="Iniciar sesión - Actulab" 
+  description="Accede a tu cuenta de Actulab."
+>
+  <div class="auth-page">
+    <div class="auth-background" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+    </div>
+
+    <a href={baseUrl} class="back-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
+      </svg>
+      Volver al portal
+    </a>
+
+    <main class="auth-container">
+      <div class="auth-card">
+        <div class="auth-brand">
+          <span class="brand-icon">A</span>
+          <span class="brand-name">Actulab</span>
+        </div>
+
+        <h1 class="auth-title">Iniciar sesión</h1>
+        <p class="auth-description">
+          Ingresa a tu cuenta para administrar la información de tu negocio.
+        </p>
+
+        <form class="auth-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Este es un formulario de demostración. La autenticación se conectará más adelante.');">
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="tu@correo.com" 
+              required 
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="••••••••" 
+              required 
+              autocomplete="current-password"
+            />
+          </div>
+
+          <button type="submit" class="submit-button">Iniciar sesión</button>
+        </form>
+
+        <div class="auth-links">
+          <a href="#" class="auth-link">¿Olvidaste tu contraseña?</a>
+          <span class="auth-separator">·</span>
+          <a href={`${baseUrl}solicitar-acceso`} class="auth-link">¿No tienes cuenta? Solicita acceso</a>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .auth-page {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  .auth-background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.2;
+  }
+
+  .blob-1 {
+    width: 30rem;
+    height: 30rem;
+    top: -8rem;
+    right: -8rem;
+    background: radial-gradient(circle, var(--color-primary), transparent 70%);
+  }
+
+  .blob-2 {
+    width: 26rem;
+    height: 26rem;
+    bottom: -6rem;
+    left: -6rem;
+    background: radial-gradient(circle, var(--color-accent), transparent 70%);
+  }
+
+  .back-link {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-primary);
+  }
+
+  .auth-container {
+    width: 100%;
+    max-width: 28rem;
+  }
+
+  .auth-card {
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    background: white;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
+  }
+
+  .auth-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+
+  .brand-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.625rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    color: white;
+    font-size: 1.125rem;
+  }
+
+  .auth-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .auth-description {
+    color: var(--color-text-muted);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .form-group input {
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: var(--color-surface);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  }
+
+  .submit-button {
+    padding: 0.875rem;
+    border: none;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+  }
+
+  .auth-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .auth-link {
+    color: var(--color-primary);
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+
+  .auth-link:hover {
+    color: var(--color-accent);
+  }
+
+  .auth-separator {
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 480px) {
+    .auth-card {
+      padding: 1.75rem;
+    }
+  }
+</style>

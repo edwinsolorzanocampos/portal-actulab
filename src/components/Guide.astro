@@ -1,44 +1,86 @@
 ---
-const LOGIN_URL = 'http://192.168.100.112:3000';
+import WhatsAppChat from './WhatsAppChat.astro';
 
 const steps = [
   {
     number: '01',
-    title: 'Conecta tu WhatsApp',
-    description: 'Vincula tu línea de WhatsApp con Actulab para consultar tu negocio de forma natural y rápida.'
+    title: 'Realiza una operación en tu negocio',
+    description: 'Vende un producto, recibe un abono, entrega mercancía o cualquier movimiento del día a día.'
   },
   {
     number: '02',
-    title: 'Configura tu negocio',
-    description: 'Registra tus productos, clientes, ventas y créditos desde el dashboard web.'
+    title: 'Envía un mensaje por WhatsApp',
+    description: 'Cuéntale a Actulab, en tus propias palabras, lo que acaba de suceder. Sin formularios ni pasos extras.'
   },
   {
     number: '03',
-    title: 'Consulta con IA',
-    description: 'Envía un mensaje por WhatsApp y la inteligencia artificial te responderá con los datos de tu negocio al instante.'
+    title: 'La IA interpreta y actualiza',
+    description: 'La inteligencia artificial entiende tu mensaje, organiza la información y te confirma lo registrado.'
+  }
+];
+
+const examples = [
+  {
+    label: 'Registrar una venta',
+    messages: [
+      { type: 'user', text: 'Acabo de vender 3 productos a Pedro por 15 mil colones.' },
+      { type: 'bot', text: 'Venta registrada ✅\n• Cliente: Pedro\n• Productos: 3\n• Total: ₡15,000' }
+    ]
+  },
+  {
+    label: 'Consultar inventario',
+    messages: [
+      { type: 'user', text: '¿Cuánto inventario me queda de arroz?' },
+      { type: 'bot', text: 'Tienes 12 unidades de arroz disponibles en tu inventario.' }
+    ]
+  },
+  {
+    label: 'Revisar un crédito',
+    messages: [
+      { type: 'user', text: '¿Cuánto dinero me debe María?' },
+      { type: 'bot', text: 'María tiene un saldo pendiente de ₡47,500.' }
+    ]
+  },
+  {
+    label: 'Registrar un abono',
+    messages: [
+      { type: 'user', text: 'Registra un abono de 10 mil colones al crédito de Carlos.' },
+      { type: 'bot', text: 'Abono registrado ✅\n• Cliente: Carlos\n• Monto: ₡10,000\n• Saldo restante: ₡23,000' }
+    ]
   }
 ];
 ---
 
-<section id="guia" class="section guide">
+<section id="como-funciona" class="section guide">
   <div class="container">
-    <h2 class="section-title">Cómo usar Actulab</h2>
+    <h2 class="section-title">¿Cómo funciona?</h2>
     <p class="section-subtitle">
-      Empieza a gestionar tu negocio en tres pasos simples. La magia sucede en WhatsApp.
+      Tres pasos simples. Nada de instalaciones, capacitaciones ni formularios difíciles.
     </p>
+
     <div class="steps">
-      {steps.map(step => (
-        <article class="step">
+      {steps.map((step, index) => (
+        <article class="step-card reveal" style={`transition-delay: ${index * 0.1}s`}>
           <span class="step-number">{step.number}</span>
           <h3 class="step-title">{step.title}</h3>
           <p class="step-description">{step.description}</p>
         </article>
       ))}
     </div>
-    <div class="guide-cta">
-      <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" class="button-primary">
-        Acceder a Actulab
-      </a>
+
+    <div class="examples-section reveal">
+      <h3 class="examples-title">Ejemplos reales de conversaciones</h3>
+      <p class="examples-subtitle">
+        Así es como cualquier persona puede usar Actulab desde el primer día.
+      </p>
+      <div class="examples-grid">
+        {examples.map((example, index) => (
+          <div class="example-card reveal" style={`transition-delay: ${index * 0.1}s`}>
+            <span class="example-label">{example.label}</span>
+            <WhatsAppChat title="Actulab" status="Asistente" messages={example.messages} />
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -51,16 +93,22 @@ const steps = [
   .steps {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
   }
 
-  .step {
+  .step-card {
     position: relative;
     padding: 2rem;
     border-radius: var(--radius);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
   }
 
   .step-number {
@@ -84,27 +132,64 @@ const steps = [
   .step-description {
     color: var(--color-text-muted);
     font-size: 0.9375rem;
+    line-height: 1.6;
   }
 
-  .guide-cta {
+  .examples-section {
+    margin-top: 2rem;
+  }
+
+  .examples-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
     text-align: center;
+    margin-bottom: 0.75rem;
   }
 
-  .button-primary {
-    display: inline-flex;
+  .examples-subtitle {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 1.0625rem;
+    max-width: 36rem;
+    margin: 0 auto 2.5rem;
+  }
+
+  .examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 1.5rem;
+  }
+
+  .example-card {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 0.875rem 2rem;
-    border-radius: 9999px;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    color: white;
-    font-weight: 600;
-    font-size: 1rem;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .button-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+  .example-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .example-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-cyan-light));
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .example-card :global(.whatsapp-chat) {
+    border-width: 4px;
   }
 </style>
